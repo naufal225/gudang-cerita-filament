@@ -17,16 +17,21 @@ class StoriesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function($query) {
+                if(!auth()->user()->hasRole('Admin')) {
+                    $query->where('author_id', '=', auth()->user()->id);
+                }
+            })
             ->columns([
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('status')
                     ->badge(),
-                TextColumn::make('author_id')
-                    ->numeric()
+                TextColumn::make('author.name')
+                    ->searchable()
                     ->sortable(),
-                TextColumn::make('reviewer_id')
-                    ->numeric()
+                TextColumn::make('reviewer.name')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()

@@ -63,6 +63,7 @@ class StoryResource extends Resource
         return parent::getRecordRouteBindingEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])
+            ->where('author_id', auth()->user()->id);
     }
 }

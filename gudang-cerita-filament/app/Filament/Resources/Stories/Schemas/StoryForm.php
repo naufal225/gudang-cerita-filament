@@ -14,27 +14,29 @@ class StoryForm
         return $schema
             ->components([
                 TextInput::make('title')
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull(),
                 Textarea::make('story_content')
                     ->required()
+                    ->rows(10)
                     ->columnSpanFull(),
-                Select::make('status')
-                    ->options([
-            'waiting for review' => 'Waiting for review',
-            'approved' => 'Approved',
-            'canceled' => 'Canceled',
-            'in review' => 'In review',
-            'rework' => 'Rework',
-        ])
-                    ->default('waiting for review')
-                    ->required(),
-                TextInput::make('author_id')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('reviewer_id')
-                    ->numeric(),
-                Textarea::make('feedback')
-                    ->columnSpanFull(),
+        //         Select::make('status')
+        //             ->options([
+        //     'waiting for review' => 'Waiting for review',
+        //     'approved' => 'Approved',
+        //     'canceled' => 'Canceled',
+        //     'in review' => 'In review',
+        //     'rework' => 'Rework',
+        // ])
+        //             ->default('waiting for review')
+        //             ->required(),
+        //         TextInput::make('author_id')
+        //             ->required()
+        //             ->numeric(),
+        //         TextInput::make('reviewer_id')
+        //             ->numeric(),
+        //         Textarea::make('feedback')
+        //             ->columnSpanFull(),
             ]);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Stories\Pages;
 use App\Filament\Resources\Stories\StoryResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Schemas\Components\Tabs\Tab;
+use Illuminate\Database\Eloquent\Builder;
 
 class ListStories extends ListRecords
 {
@@ -16,4 +18,21 @@ class ListStories extends ListRecords
             CreateAction::make(),
         ];
     }
+
+    public function getTabs(): array
+    {
+        return [
+            'all' => Tab::make(),
+            'waiting for review' => Tab::make()
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('status', 'waiting for review')),
+            'approved' => Tab::make()
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('status', 'approved')),
+            'canceled' => Tab::make()
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('status', 'canceled')),
+            'rework' => Tab::make()
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('status', 'rework')),
+        ];
+    }
+
+
 }

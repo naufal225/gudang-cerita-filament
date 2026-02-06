@@ -22,4 +22,9 @@ class EditStory extends EditRecord
             RestoreAction::make(),
         ];
     }
+
+    public function getRedirectUrl(): string
+    {
+        return StoryResource::getIndexUrl();
+    }
 }

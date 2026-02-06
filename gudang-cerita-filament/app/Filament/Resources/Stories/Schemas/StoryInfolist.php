@@ -33,7 +33,7 @@ class StoryInfolist
                     ->placeholder('-'),
                 TextEntry::make('deleted_at')
                     ->dateTime()
-                    ->visible(fn (Story $record): bool => $record->trashed()),
+                    ->visible(fn(Story $record): bool => $record->trashed()),
             ]);
     }
 }
